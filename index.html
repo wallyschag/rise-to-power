@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="riseToPower.css">
+  <title>Rise To Power</title>
+</head>
+<body>
+  <header>
+    <h1>Rise To Power</h1>
+    <h3>A political influence text based adventure game</h3>
+  </header>
+  <p>
+    Welcome to Rise To Power! Your name is President Chuckle McLaughster of the intergalactic nation of Nova Terra. Make decisions in favor of the people or in favor of the current government. The choice is yours!
+    Choose the text box that best represents what you would do in each situation. But Be careful! Your choices will affect your reputation with the people and/or your
+    reputation with the government. If your reputation with the people gets too low, you will be impeached. If your reputation with the government gets too low, you will be
+    assassinated. Get either score to 100 and you win! Good luck!
+  </p>
+  <button id="start-button">Start</button>
+  <p id="statement"></p>
+
+  <div class="decision" id="people-choice">
+    <button class="choice" id="people-button"></button>
+  </div>
+
+  <div class="decison" id="government-choice">
+    <button class="choice" id="government-button"></button>
+  </div>
+
+  <div id="result">
+    <p id="result-text"></p>
+    <p id="people-score"></p>
+    <p id="government-score"></p>
+  </div>
+
+  <footer>
+    <p>Created by Kyle Smart, Wallace Schageman, and Scott Enriquez</p>
+  </footer>
+  <script type="text/javascript" src="riseToPower.js"></script>
+</body>
+</html>
