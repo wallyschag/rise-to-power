@@ -25,18 +25,26 @@
     <button class="choice" id="people-button"></button>
   </div>
 
-  <div class="decison" id="government-choice">
+  <div class="decision" id="government-choice">
     <button class="choice" id="government-button"></button>
   </div>
 
   <div id="result">
     <p id="result-text"></p>
-    <p id="people-score"></p>
-    <p id="government-score"></p>
+    <div id="people-score-container">
+      <label for="people-score-bar">People's Score:</label>
+      <progress id="people-score-bar" value="50" max="100"></progress>
+      <span id="people-score">50/100</span>
+    </div>
+    <div id="government-score-container">
+      <label for="government-score-bar">Government's Score:</label>
+      <progress id="government-score-bar" value="50" max="100"></progress>
+      <span id="government-score">50/100</span>
+    </div>
   </div>
 
   <button id="continue-button">Continue</button>
-  
+  <button id="playagain-button">Play again</button>
   <footer>
     <p>Created by Kyle Smart, Wallace Schageman, and Scott Enriquez</p>
   </footer>

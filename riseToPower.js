@@ -5,6 +5,11 @@ window.onload = () => {
   $('#government-choice').hide();
   $('#result-text').hide();
   $('#continue-button').hide();
+  $('#playagain-button').hide();
+  $('#people-score-bar').hide();
+  $('#government-score-bar').hide();
+  $('#people-score-container').hide(); // Hide the score container initially
+  $('#government-score-container').hide();
 }
 
 //initialize game variables
@@ -53,102 +58,138 @@ const results = [
   ['People may be excited about the adventure, but the government might face criticism for prioritizing entertainment over serious matters. +10 People Points. -5 Government Points.','Government reputation may remain stable, but missed opportunities for alliances and potential rewards from the game show. +10 Government Points. -5 People Points.'],
 ];
 
-//game scores
+// Game scores
 var peopleScore = 50;
 var governmentScore = 50;
 
-
-//on click start button function
+// On click start button function
 $('#start-button').on('click', () => {
   $('#start-button').hide();
   $('#statement').show();
   $('#people-choice').show();
   $('#government-choice').show();
-  $('#result-text').show();
-  $('continue-button').show();
-  $('#people-score').text(peopleScore);
-  $('#government-score').text(governmentScore);
+  $('#result').show(); // Show the result div which contains the progress bars
+  $('#people-score-bar').show();
+  $('#government-score-bar').show();
+  $('#people-score-container').show(); // Hide the score container initially
+  $('#government-score-container').show();
+
+  updateScores();
   $('#statement').text(statements[iteration]);
   $('#people-button').text(buttonText[iteration][0]);
   $('#government-button').text(buttonText[iteration][1]);
   gameStarted = true;
-})
+});
 
-//on click people button function
+// Function to update score progress bars and text
+function updateScores() {
+  $('#people-score-bar').val(peopleScore);
+  $('#government-score-bar').val(governmentScore);
+  $('#people-score').text(peopleScore + '/100');
+  $('#government-score').text(governmentScore + '/100');
+}
+// On click people button function
 $('#people-button').on('click', () => {
   peopleScore += 10;
   governmentScore -= 5;
-  $('#result-text').show();
-  $('#statement').hide();
-  $('#people-button').hide();
-  $('#government-button').hide();
-  $('#people-score').text(peopleScore);
-  $('#government-score').text(governmentScore);
   $('#result-text').text(results[iteration][0]);
+  updateScores();
+  $('#people-choice').hide();
+  $('#government-choice').hide();
   $('#continue-button').show();
   iteration++;
-})
+  checkEndGame();
+});
 
-//on click government button function
+// On click government button function
 $('#government-button').on('click', () => {
   governmentScore += 10;
   peopleScore -= 5;
-  $('#result-text').show();
-  $('#statement').hide();
-  $('#people-button').hide();
-  $('#government-button').hide();
-  $('#people-score').text(peopleScore);
-  $('#government-score').text(governmentScore);
   $('#result-text').text(results[iteration][1]);
+  updateScores();
+  $('#people-choice').hide();
+  $('#government-choice').hide();
   $('#continue-button').show();
   iteration++;
-})
+  checkEndGame();
+});
 
-//on click continue button function
+
 $('#continue-button').on('click', () => {
-  $('continue-button').hide();
-  $('#result-text').hide()
-  $('#people-button').show();
-  $('#government-button').show();
-  $('#statement').show();
-  $('#statement').text(statements[iteration]);
-  $('#people-button').text(buttonText[iteration][0]);
-  $('#government-button').text(buttonText[iteration][1]);
+  if (iteration < statements.length) {
+    $('#statement').text(statements[iteration]);
+    $('#people-button').text(buttonText[iteration][0]);
+    $('#government-button').text(buttonText[iteration][1]);
+    $('#result-text').hide();
+    $('#people-choice').show();
+    $('#government-choice').show();
+    $('#continue-button').hide();
+    if  (governmentScore <= 0) {
+      $('#people-score-bar').hide();
+      $('#government-score-bar').hide();
+      $('#people-score-container').hide(); 
+      $('#government-score-container').hide();
+      $('#result-text').show();
+      $('#people-button').hide();
+      $('#government-button').hide();
+      $('#statement').hide();
+      $('#continue-button').hide();
+      $('#result-text').text('You have lost your reputation with the government. Although you have made the people of Nova Terra happy, the current government has assassinated you in you sleep. GAME OVER.');
+      $('#playagain-button').show();
+    }
   
-  if  (governmentScore <= 0) {
-    $('#result-text').show();
-    $('#people-button').hide();
-    $('#government-button').hide();
-    $('#statement').hide();
-    $('#continue-button').hide();
-    $('#result-text').text('You have lost your reputation with the government. Although you have made the people of Nova Terra happy, the current government has assassinated you in you sleep. GAME OVER.');
-  }
+    if  (peopleScore <= 0) {
+      $('#people-score-bar').hide();
+      $('#government-score-bar').hide();
+      $('#people-score-container').hide(); 
+      $('#government-score-container').hide();
+      $('#result-text').show();
+      $('#people-button').hide();
+      $('#government-button').hide();
+      $('#statement').hide();
+      $('#continue-button').hide();
+      $('#result-text').text('You have lost your reputation with the people. Although you have made the government of Nova Terra happy, the people have voted to impeach you. GAME OVER.');
+      $('#playagain-button').show();
+    }
+  
+    if (iteration >= 9) {
+      $('#people-score-bar').hide();
+      $('#government-score-bar').hide();
+      $('#people-score-container').hide(); 
+      $('#government-score-container').hide();
+      $('#people-score-bar').hide();
+      $('#government-score-bar').hide();
+      $('#people-score-container').hide(); 
+      $('#government-score-container').hide();
+      $('#result-text').show();
+      $('#people-button').hide();
+      $('#government-button').hide();
+      $('#statement').hide();
+      $('#continue-button').hide();
+      $('#result-text').text('You have run out of time. The people and the government both hate you and your inability to make decisions. GAME OVER.');
+      $('#playagain-button').show();
+    }
+  
+    if (peopleScore >= 100 || governmentScore >= 100) {
+      $('#people-score-bar').hide();
+      $('#government-score-bar').hide();
+      $('#people-score-container').hide(); 
+      $('#government-score-container').hide();
+      $('#result-text').show();
+      $('#people-button').hide();
+      $('#government-button').hide();
+      $('#statement').hide();
+      $('#continue-button').hide();
+      $('#result-text').text('Congratulations! You have won the game! You have achieved complete political influence over Nova Terra!');
+      $('#playagain-button').show();
+    }
+}});
 
-  if  (peopleScore <= 0) {
-    $('#result-text').show();
-    $('#people-button').hide();
-    $('#government-button').hide();
-    $('#statement').hide();
-    $('#continue-button').hide();
-    $('#result-text').text('You have lost your reputation with the people. Although you have made the government of Nova Terra happy, the people have voted to impeach you. GAME OVER.');
-  }
 
-  if (iteration >= 9) {
-    $('#result-text').show();
-    $('#people-button').hide();
-    $('#government-button').hide();
-    $('#statement').hide();
-    $('#continue-button').hide();
-    $('#result-text').text('You have run out of time. The people and the government both hate you and your inability to make decisions. GAME OVER.');
-  }
 
-  if (peopleScore >= 100 || governmentScore >= 100) {
-    $('#result-text').show();
-    $('#people-button').hide();
-    $('#government-button').hide();
-    $('#statement').hide();
-    $('#continue-button').hide();
-    $('#result-text').text('Congratulations! You have won the game! You have achieved complete political influence over Nova Terra!');
-  }
-})
-
+function updateScores() {
+  $('#people-score-bar').val(peopleScore);
+  $('#government-score-bar').val(governmentScore);
+  $('#people-score').text(peopleScore + '/100');
+  $('#government-score').text(governmentScore + '/100');
+}
