@@ -103,9 +103,12 @@ function updateScores() {
   $('#government-score-bar').val(governmentScore);
   $('#people-score').text(peopleScore + '/100');
   $('#government-score').text(governmentScore + '/100');
+
 }
 // On click people button function
 $('#people-button').on('click', () => {
+  $('#result-text').show();
+  $('#statement').hide();
   peopleScore += 10;
   governmentScore -= 5;
   $('#result-text').text(results[iteration][0]);
@@ -115,10 +118,13 @@ $('#people-button').on('click', () => {
   $('#continue-button').show();
   iteration++;
   checkEndGame();
+  
 });
 
 // On click government button function
 $('#government-button').on('click', () => {
+  $('#result-text').show();
+  $('#statement').hide();
   governmentScore += 10;
   peopleScore -= 5;
   $('#result-text').text(results[iteration][1]);
@@ -134,6 +140,7 @@ $('#government-button').on('click', () => {
 $('#continue-button').on('click', () => {
   updateImage();
   if (iteration < statements.length) {
+    $('#statement').show();
     $('#statement').text(statements[iteration]);
     $('#people-button').text(buttonText[iteration][0]);
     $('#government-button').text(buttonText[iteration][1]);
