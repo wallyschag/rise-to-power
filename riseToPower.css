@@ -72,3 +72,12 @@ progress[value]::-moz-progress-bar {
   background-color: #deb887;
   border-radius: 3px;
 }
+
+#logo_img {
+  float: left;
+  margin: 7px;
+}
+
+#shield_img {
+  float: right;
+}
