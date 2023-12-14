@@ -6,3 +6,5 @@ which included visual appeal, engaging gameplay, and advanced use of JavaScript 
 was the <progress> tag and we used advanced CSS selectors to style it along with jQuery to update it. In terms of game play, we created an 
 interesting story line about a fictional intergalactic nation, and we added a competition element to it as well by allowing the user to 
 choose between the People and the Government. Finally, we added consistent styling with use of many CSS semntic tags and a consistent color scheme.
+
+DISCLAIMER: Images were generated using DALL E

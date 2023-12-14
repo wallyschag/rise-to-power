@@ -17,7 +17,7 @@ window.onload = () => {
 let iteration = 0;
 let gameStarted = false;
 let currentIndex = 0
-const images = ['1a.PNG','2a.PNG','3a.PNG','4a.PNG','5a.PNG','6a.PNG', '7a.PNG', '8a.PNG', '9a.PNG']
+const images = ['images/1a.PNG','images/2a.PNG','images/3a.PNG','images/4a.PNG','images/5a.PNG','images/6a.PNG', 'images/7a.PNG', 'images/8a.PNG', 'images/9a.PNG']
 
 //statements for player choices
 const statements = [
