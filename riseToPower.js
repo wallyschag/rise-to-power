@@ -1,5 +1,6 @@
 // Hide stuff on window load
 window.onload = () => {
+  $("#dynamic-image").hide();
   $('#statement').hide();
   $('#people-choice').hide();
   $('#government-choice').hide();
@@ -15,6 +16,8 @@ window.onload = () => {
 //initialize game variables
 let iteration = 0;
 let gameStarted = false;
+let currentIndex = 0
+const images = ['1a.PNG','2a.PNG','3a.PNG','4a.PNG','5a.PNG','6a.PNG', '7a.PNG', '8a.PNG', '9a.PNG']
 
 //statements for player choices
 const statements = [
@@ -64,6 +67,8 @@ var governmentScore = 50;
 
 // On click start button function
 $('#start-button').on('click', () => {
+  updateImage();
+  $("#dynamic-image").show();
   $('#start-button').hide();
   $('#statement').show();
   $('#people-choice').show();
@@ -75,11 +80,22 @@ $('#start-button').on('click', () => {
   $('#government-score-container').show();
 
   updateScores();
+
   $('#statement').text(statements[iteration]);
   $('#people-button').text(buttonText[iteration][0]);
   $('#government-button').text(buttonText[iteration][1]);
+
   gameStarted = true;
+ 
 });
+function updateImage() {
+  if (currentIndex < images.length) {
+    document.getElementById('dynamic-image').src = images[currentIndex];
+    currentIndex++;
+  } else {
+    currentIndex = 0;
+  }
+}
 
 // Function to update score progress bars and text
 function updateScores() {
@@ -116,6 +132,7 @@ $('#government-button').on('click', () => {
 
 
 $('#continue-button').on('click', () => {
+  updateImage();
   if (iteration < statements.length) {
     $('#statement').text(statements[iteration]);
     $('#people-button').text(buttonText[iteration][0]);
@@ -134,6 +151,7 @@ $('#continue-button').on('click', () => {
       $('#government-button').hide();
       $('#statement').hide();
       $('#continue-button').hide();
+      $("#dynamic-image").hide();
       $('#result-text').text('You have lost your reputation with the government. Although you have made the people of Nova Terra happy, the current government has assassinated you in you sleep. GAME OVER.');
       $('#playagain-button').show();
     }
@@ -148,6 +166,7 @@ $('#continue-button').on('click', () => {
       $('#government-button').hide();
       $('#statement').hide();
       $('#continue-button').hide();
+      $("#dynamic-image").hide();
       $('#result-text').text('You have lost your reputation with the people. Although you have made the government of Nova Terra happy, the people have voted to impeach you. GAME OVER.');
       $('#playagain-button').show();
     }
@@ -166,6 +185,7 @@ $('#continue-button').on('click', () => {
       $('#government-button').hide();
       $('#statement').hide();
       $('#continue-button').hide();
+      $("#dynamic-image").hide();
       $('#result-text').text('You have run out of time. The people and the government both hate you and your inability to make decisions. GAME OVER.');
       $('#playagain-button').show();
     }
@@ -180,6 +200,7 @@ $('#continue-button').on('click', () => {
       $('#government-button').hide();
       $('#statement').hide();
       $('#continue-button').hide();
+      $("#dynamic-image").hide();
       $('#result-text').text('Congratulations! You have won the game! You have achieved complete political influence over Nova Terra!');
       $('#playagain-button').show();
     }
