@@ -193,3 +193,7 @@ function updateScores() {
   $('#people-score').text(peopleScore + '/100');
   $('#government-score').text(governmentScore + '/100');
 }
+
+document.getElementById('playagain-button').addEventListener('click', function() {
+  location.reload();
+});
